@@ -4,7 +4,7 @@
   "description": "MAGE client SDK for JavaScript (ES5)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint ."
   },
   "keywords": [
     "mage",
@@ -20,5 +20,9 @@
     "events.js": "^0.1.4",
     "inherits": "^2.0.3",
     "wizcorp-deep-copy.js": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "pre-commit": "^1.2.2"
   }
 }

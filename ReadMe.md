@@ -24,7 +24,7 @@ npm install --save mage-sdk-js.time
 npm install --save mage-sdk-js.archivist
 ```
 
-You can find the all available MAGE client modules on [NPM](https://www.npmjs.com/search?q=mage-sdk-js).
+You can find all available MAGE client modules on [NPM](https://www.npmjs.com/search?q=mage-sdk-js).
 
 ## Read more
 

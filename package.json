@@ -1,6 +1,6 @@
 {
   "name": "mage-sdk-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MAGE client SDK for JavaScript (ES5)",
   "main": "index.js",
   "scripts": {

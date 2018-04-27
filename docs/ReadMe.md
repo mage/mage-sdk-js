@@ -1,21 +1,17 @@
 # Using the MAGE Web SDK
 
-## Integrating client-configuration
+## Integration
 
-Assuming you have bootstrapped a MAGE server application, you need to make sure that the MAGE client-configuration ends
-up in your build. The configuration for the browser application can be extracted from the `mage` object, by calling its
-`mage.getClientConfig(appName)` method. How you integrate the returned object into your build is up to you.
+Please follow the [integration tutorial](./integrations) to know how to integrate the Mage SDK with Webpack.
 
-- You can write the configuration to a JSON file that your build system picks up and embeds.
-- You can host the JSON on an HTTP endpoint.
-- You can have both client-code and server-code in a single repository, and integrate the build system into it.
 
-Which approach you take will depend on your desired workflow. In the [integrations](./integrations) folder we provide
-examples for specific build systems.
+
 
 ## Setting up the MAGE Web SDK runtime
 
-Once you have integrated the MAGE Web SDK, you need to register any modules you wish to use with MAGE, and run their
+Once you have integrated the MAGE Web SDK, you need to configure the SDK by first calling `mage.setEndpoint()` to setup your server endpoint, followed by `mage.init` to make the Mage SDK fetch the config from the server.
+
+Then, you need to register any modules you wish to use with MAGE, and run their
 asynchronous `exports.setup(callback)` methods.
 
 It is important to note that for some modules you will probably want to delay their setup phase until after a user has
@@ -47,26 +43,47 @@ up yet.
 ```javascript
 var mage = require('mage-sdk-js');
 
-// register and set up all modules that don't require login
+mage.setEndpoint(
+	'http://127.0.0.1', // Base url
+	'game' 				// App name
+);
 
-mage.addModule('session', require('mage-sdk-js.session'));
-mage.addModule('logger', require('mage-sdk-js.logger'));
-mage.addModule('time', require('mage-sdk-js.time'));
-mage.addModule('archivist', require('mage-sdk-js.archivist'));
-mage.addModule('user', require('../lib/modules/user/client'));
+// Init mage sdk
+// It will fetch the usercommands config from the endpoint
 
-mage.setup(function (error) {
-	// authenticate the user
+mage.init(function(err) {
+	if (err) {
+		return;
+	}
 
-	mage.user.login(function (error) {
-		// register and setup all modules that require login
+	// Register all modules that don't require login
 
-		mage.addModule('missions', require('../lib/modules/missions/client'));
+	mage.addModule('session', require('mage-sdk-js.session'));
+	mage.addModule('logger', require('mage-sdk-js.logger'));
+	mage.addModule('time', require('mage-sdk-js.time'));
+	mage.addModule('archivist', require('mage-sdk-js.archivist'));
 
-		mage.setup(function (error) {
-			// All done!
+	// Register player usercommand module
 
-			console.log(mage.missions.getMissionProgress());
+	mage.addModule('player');
+
+	// Setup registered modules
+
+	mage.setup(function (error) {
+		// Authenticate the player
+
+		mage.player.login(function (error) {
+			// Register and setup all modules that require login
+
+			mage.addModule('missions');
+
+			mage.setup(function (error) {
+				// Call missions.getMissionProgress usercommand
+
+				mage.missions.getMissionProgress(function(err, missions) {
+					console.log(missions)
+				});
+			});
 		});
 	});
 });

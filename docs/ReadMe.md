@@ -4,8 +4,21 @@
 
 Please follow the [integration tutorial](./integrations) to know how to integrate the Mage SDK with Webpack.
 
+## Server-side configuration
 
+> lib/index.js
 
+```javascript
+mage.addModules([
+	'config',
+	// ... other built-in modules ...
+])
+```
+
+To init the SDK, your MAGE server needs to expose the client config. Projects created
+using `npx mage create` will have the config module configured by default.
+
+Please see the [MAGE documentation](https://mage.github.io/mage#built-in-modules) for more information regarding the `config` module.
 
 ## Setting up the MAGE Web SDK runtime
 
@@ -45,14 +58,15 @@ var mage = require('mage-sdk-js');
 
 mage.setEndpoint(
 	'http://127.0.0.1', // Base url
-	'game' 				// App name
+	'myGame' 			// App name (default: 'game')
 );
 
-// Init mage sdk
+// Init mage SDK
 // It will fetch the usercommands config from the endpoint
 
 mage.init(function(err) {
 	if (err) {
+		console.error(err);
 		return;
 	}
 

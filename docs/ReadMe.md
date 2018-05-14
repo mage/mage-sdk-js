@@ -41,5 +41,15 @@ mage.configure(async (err) => {
 	await mage.setupModule('time', require('mage-sdk-js.time'));
 	await mage.setupModule('archivist', require('mage-sdk-js.archivist'));
 
-	const player = await mage.player.login();
+	// Send a single command
+
+	await mage.players.login();
+
+	// Send a batch
+
+	const results = await mage.batchCommands([
+		mage.players.list(),
+		mage.players.list(),
+		mage.players.list()
+	])
 });

@@ -32,6 +32,11 @@ mage.setEndpoint('http://127.0.0.1:8080');
 // and load all user commands
 
 mage.configure(async (err) => {
+	if (err) {
+		console.error(err);
+		return;
+	}
+
 	// You can register additional setup functions when adding modules;
 	// here below, we add additional client-side code from external
 	// modules. Make sure you add them on the server side as well!

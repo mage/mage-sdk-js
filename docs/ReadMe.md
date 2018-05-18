@@ -51,6 +51,8 @@ mage.configure(async (err) => {
 	await mage.players.login();
 
 	// Send a batch
+	// Return an array of form:
+	// [{data: ..., error: ...}]
 
 	const results = await mage.batchCommands([
 		mage.players.list(),

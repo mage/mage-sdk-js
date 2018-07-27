@@ -8,7 +8,7 @@ Thus, if you want to **support older browsers** or use new EcmaScript features, 
 > lib/index.js
 
 ```javascript
-mage.addModules([
+mage.useModules([
 	'config',
 	// ... other built-in modules ...
 ])

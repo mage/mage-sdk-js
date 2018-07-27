@@ -228,4 +228,4 @@ rules:
 env:
   commonjs: true
   browser: true
-  es6: false
+  es6: true

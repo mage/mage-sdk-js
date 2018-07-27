@@ -1,6 +1,6 @@
 {
   "name": "mage-sdk-js",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "MAGE client SDK for JavaScript (ES5)",
   "main": "index.js",
   "scripts": {
@@ -25,8 +25,8 @@
     "eslint": "^3.19.0",
     "pre-commit": "^1.2.2"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/mage/mage-sdk-js.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mage/mage-sdk-js.git"
   }
 }
